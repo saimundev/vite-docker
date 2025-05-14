@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: frontend
+    container_name: frontend-aws
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - .:/app
+
+    environment:
+      - NODE_ENV=development
