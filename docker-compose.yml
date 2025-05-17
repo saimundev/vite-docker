@@ -1,15 +1,13 @@
 version: "3.8"
+
 services:
-  frontend:
-    image: frontend
-    container_name: frontend-aws
-    build:
-      context: .
-      dockerfile: Dockerfile
+  react-app:
+    build: .
     ports:
-      - 5173:5173
+      - "5173:5173"
     volumes:
       - .:/app
-
+      - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
