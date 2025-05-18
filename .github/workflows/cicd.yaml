@@ -28,3 +28,18 @@ jobs:
           context: .
           push: true
           tags: saimundev/react-vite-project:latest
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull saimundev/react-vite-project:latest
+            docker stop react-app || true
+            docker rm react-app || true
+            docker run -d --name react-app -p 80:80 saimundev/react-vite-project:latest
