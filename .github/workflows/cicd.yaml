@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository main
         uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
@@ -42,4 +42,4 @@ jobs:
             docker pull saimundev/react-vite-project:latest
             docker stop react-app || true
             docker rm react-app || true
-            docker run -d --name react-app -p 80:80 saimundev/react-vite-project:latest
+            docker run -d --name react-app -p 5173:5173 saimundev/react-vite-project:latest
